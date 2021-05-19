@@ -6,7 +6,7 @@ let faceapi;
 let video;
 let genImg;
 let detections;
-let lbx, lby, rbx, my;
+let faceX, faceY, faceWidth, faceHeight;
 
 const detection_options = {
     withLandmarks: true,
@@ -14,7 +14,7 @@ const detection_options = {
 }
 
 function preload() {
-    genImg = loadImage("./images/gen.jpg");
+    genImg = loadImage("./images/gen.jpeg");
 }
 
 function setup() {
@@ -47,7 +47,7 @@ function gotResults(err, result) {
 
     }
 
-    let c = get(lbx, lby, rbx - lbx, rbx - lbx);
+    let c = get(faceX,faceY,faceWidth,faceHeight);
 
     push();
     scale(windowWidth / genImg.width);
@@ -63,13 +63,15 @@ function getLandmarks(detections) {
 
     if (detections.length < 0) return;
 
-    const mouth = detections[0].parts.mouth;
     const rightEyeBrow = detections[0].parts.rightEyeBrow;
     const leftEyeBrow = detections[0].parts.leftEyeBrow;
 
-    lbx = leftEyeBrow[0].x;
-    lby = leftEyeBrow[0].y;
-    rbx = rightEyeBrow[rightEyeBrow.length - 1].x;
-    my = mouth[int(mouth.length * 3 / 4)].y;
+    faceX = leftEyeBrow[0].x;
+    faceY = leftEyeBrow[0].y;
+    faceWidth = rightEyeBrow[rightEyeBrow.length - 1].x - faceX;
+    faceHeight = faceWidth;
+
+    console.log(faceX,faceY,faceWidth,faceHeight);
+
 
 }
