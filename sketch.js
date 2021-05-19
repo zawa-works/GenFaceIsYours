@@ -8,14 +8,13 @@ let genImg;
 let detections;
 let lbx, lby, rbx, my;
 
-// by default all options are set to true
 const detection_options = {
     withLandmarks: true,
     withDescriptors: false,
 }
 
 function preload() {
-    genImg = loadImage("https://portal.st-img.jp/detail/f7cf40ddfb741bcbb4b25cd12f97e675_1621425184_1.jpg");
+    genImg = loadImage("./images/gen.jpg");
 }
 
 function setup() {
